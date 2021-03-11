@@ -1,65 +1,89 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import { IconButton, Fade } from "@material-ui/core";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [arrows, setArrows] = useState(false);
+  console.log(currentSlide);
+
+  const slides = [
+    {
+      img: "/slider/china_random.jpg",
+      alt: "china river house",
+      width: 900,
+      height: 600,
+    },
+    {
+      img: "/slider/noordwijk_woonkamer.jpg",
+      alt: "livingroom noordwijk",
+      width: 900,
+      height: 600,
+    },
+    {
+      img: "/slider/noordwijkerhout_sancta.jpg",
+      alt: "sancta noordijkerhout",
+      width: 900,
+      height: 600,
+    },
+  ];
+
+  const nextSlide = () => {
+    setCurrentSlide(currentSlide === slides.length - 1 ? 0 : currentSlide + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => {
+        return slides.length - 1 === prev ? 0 : prev + 1;
+      });
+    }, 8000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [currentSlide]);
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div
+      className={styles.container}
+      onMouseEnter={() => setArrows(true)}
+      onMouseLeave={() => setArrows(false)}
+    >
+      <Fade timeout={1500} in={arrows}>
+        <IconButton className={styles.arrow_left} onClick={prevSlide}>
+          <ChevronLeftIcon fontSize="large" />
+        </IconButton>
+      </Fade>
+      <Fade timeout={1500} in={arrows}>
+        <IconButton className={styles.arrow_right} onClick={nextSlide}>
+          <ChevronRightIcon fontSize="large" />
+        </IconButton>
+      </Fade>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      {slides.map((slide, index) => {
+        if (index === currentSlide)
+          return (
+            <Fade in={index === currentSlide} key={index} timeout={1500}>
+              <div className={styles.image}>
+                <Image
+                  priority
+                  src={slide.img}
+                  alt={slide.alt}
+                  width={slide.width}
+                  height={slide.height}
+                />
+              </div>
+            </Fade>
+          );
+      })}
     </div>
-  )
+  );
 }
