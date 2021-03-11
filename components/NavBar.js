@@ -2,7 +2,7 @@ import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 import { useState } from "react";
 import { IconButton, useMediaQuery, Collapse } from "@material-ui/core";
 import Link from "next/link";
-import styles from "../styles/navbar.module.css";
+import styles from "../styles/NavBar.module.css";
 import Image from "next/image";
 
 const NavBar = () => {
