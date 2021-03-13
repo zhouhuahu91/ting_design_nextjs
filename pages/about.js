@@ -1,11 +1,10 @@
 import styles from "../styles/About.module.css";
-import Image from "next/image";
 
 const About = () => {
   return (
     <div className={styles.about_container}>
       <div className={styles.img_container}>
-        <Image src="/aboutme.jpg" width={350} height={527} priority />
+        <img src="/aboutme.jpg" width={350} height={527} />
       </div>
       <div className={styles.about_text}>
         <h2>about me</h2>

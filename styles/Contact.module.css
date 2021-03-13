@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  max-width: 768px;
+  padding: 20px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.container a {
+  margin-left: 20px;
+}
+
+.info {
+  margin: 20px 0px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.info p {
+  margin: 0px 0px 0px 20px;
+}
+
+.qr {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+@media (max-width: 400px) {
+  .qr {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}

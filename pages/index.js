@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { IconButton, Fade } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -9,7 +8,6 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [arrows, setArrows] = useState(false);
-  console.log(currentSlide);
 
   const slides = [
     {
@@ -73,8 +71,7 @@ export default function Home() {
           return (
             <Fade in={index === currentSlide} key={index} timeout={1500}>
               <div className={styles.image}>
-                <Image
-                  priority
+                <img
                   src={slide.img}
                   alt={slide.alt}
                   width={slide.width}
