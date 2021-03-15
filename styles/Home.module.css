@@ -5,37 +5,7 @@
   max-height: 1000px;
   margin: auto;
   position: relative;
-  overflow: hidden;
-
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-}
-
-@media screen and (max-width: 768px) {
-  .container {
-    height: calc(100vh - 80px);
-  }
-}
-
-.slider {
-  height: 60vh;
-  max-height: 900px;
-  width: 1200px;
-  max-width: 80vw;
-  background: blue;
-}
-
-.arrow_left {
-  left: 15px;
-  position: absolute !important;
-}
-
-.arrow_right {
-  right: 15px;
-  position: absolute !important;
-}
-
-.image {
-  max-width: 80vw;
 }
